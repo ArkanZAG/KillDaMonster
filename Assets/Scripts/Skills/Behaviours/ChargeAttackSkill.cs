@@ -2,7 +2,7 @@ namespace DefaultNamespace
 {
     public class ChargeAttackSkill : Skill
     {
-        private int damage;
+        private int damageAmount;
         private float chargeTime;
         
         
