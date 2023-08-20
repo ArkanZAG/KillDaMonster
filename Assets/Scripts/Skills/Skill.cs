@@ -8,7 +8,7 @@ public class Skill
 {
     
     [SerializeField] private float cooldown;
-    
+    private float currentCooldown;
 
     public virtual void DoSkill(Character target)
     {
