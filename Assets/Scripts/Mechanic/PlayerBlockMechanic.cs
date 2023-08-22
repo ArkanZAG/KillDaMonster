@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Actor;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,9 @@ namespace Mechanic
             player.SetBlockState(true);
 
             blockButton.interactable = false;
+            
+            player.transform.localScale = Vector3.one * 1.2f;
+            player.transform.DOScale(Vector3.one, 0.3f);
             
             imageColor.color = Color.yellow;
 

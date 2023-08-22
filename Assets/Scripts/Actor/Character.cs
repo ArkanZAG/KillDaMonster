@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace Actor
             if (!isBlocked)
             {
                 hp = hp - damage;
+                transform.DOShakePosition(0.2f, Vector3.right * 10f);
             }
         }
 

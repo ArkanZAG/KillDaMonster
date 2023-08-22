@@ -1,5 +1,6 @@
 using System.Collections;
 using Actor;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,9 @@ namespace Mechanic
             float cooldown = 5f;
 
             healButton.interactable = false;
+            
+            player.transform.localScale = new Vector3(1, 1.3f, 1);
+            player.transform.DOScale(Vector3.one, 0.3f);
 
             yield return new WaitForSeconds(cooldown);
 
