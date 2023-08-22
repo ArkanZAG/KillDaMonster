@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Actor;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,8 @@ public class PlayerAttackMechanic : MonoBehaviour
         StartCoroutine(CooldownAttack());
         Debug.Log("Attacking!");
     }
+    
+    
     
 
     
