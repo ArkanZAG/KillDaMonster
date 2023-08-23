@@ -14,6 +14,8 @@ namespace Mechanic
         [SerializeField] private Button blockButton;
         [SerializeField] private Character player;
         [SerializeField] private Image imageColor;
+        [SerializeField] private Animator playerAnimator;
+        [SerializeField] private ParticleSystem playerParticle;
 
         private void Start()
         {
@@ -44,6 +46,7 @@ namespace Mechanic
 
         private void DoBlock()
         {
+            playerAnimator.SetTrigger("Block");
             StartCoroutine(BlockCoroutine());
         }
         

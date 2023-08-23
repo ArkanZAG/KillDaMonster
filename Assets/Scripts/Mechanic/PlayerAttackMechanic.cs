@@ -11,6 +11,7 @@ public class PlayerAttackMechanic : MonoBehaviour
     [SerializeField] private Button attackButton;
     [SerializeField] private Character monster;
     [SerializeField] private int damageAmount;
+    [SerializeField] private Animator playerAnimator;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerAttackMechanic : MonoBehaviour
     {
         monster.Damage(damageAmount);
         StartCoroutine(CooldownAttack());
+        playerAnimator.SetTrigger("Attack");
         Debug.Log("Attacking!");
     }
     

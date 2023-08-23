@@ -12,6 +12,7 @@ namespace Mechanic
         [SerializeField] private Button healButton;
         [SerializeField] private Character player;
         [SerializeField] private int healAmount;
+        [SerializeField] private Animator playerAnimator;
 
         private void Start()
         {
@@ -32,12 +33,11 @@ namespace Mechanic
             healButton.interactable = true;
         }
         
-        
-
         private void Heal()
         {
             player.Heal(healAmount);
             StartCoroutine(CooldownHeal());
+            playerAnimator.SetTrigger("Heal");
             Debug.Log("Healing!");
         }
     }
