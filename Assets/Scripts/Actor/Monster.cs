@@ -11,14 +11,17 @@ namespace Actor
         [SerializeField] private Character player;
         [SerializeField] private int damageAmout;
         [SerializeField] private TextMeshProUGUI countdown;
-        private int totalCountdown;
+        [SerializeField] private Coroutine attackCoroutine;
+        private float totalCountdown;
+        private bool isStunned = false;
+        private bool isCouroutinePaused = false;
 
         private void Start()
         {
-            StartCoroutine(DoTimer());
+            attackCoroutine = StartCoroutine(AttackBehaviour(3));
         }
 
-        private void CountDownNumber(int secondLeft)
+        private void CountDownNumber(float secondLeft)
         {
             countdown.text = secondLeft.ToString();
         }
@@ -27,22 +30,41 @@ namespace Actor
         {
             countdown.text = totalCountdown.ToString();
         }
-        
-        IEnumerator DoTimer(float timer = 1f)
+
+        public void SetIsStunned(bool isStunned)
+        {
+            if (isStunned)
+            {
+                StopCoroutine(attackCoroutine);
+            }
+            else
+            {
+                attackCoroutine = StartCoroutine(AttackBehaviour(totalCountdown));
+            }
+        }
+
+        IEnumerator AttackBehaviour(float startingCountdown)
         {
             while (true)
             {
-                totalCountdown = 3;
-                while (totalCountdown >= 0)
+                if (!isCouroutinePaused)
                 {
-                    CountDownNumber(totalCountdown);
-                    yield return new WaitForSeconds(timer);
-                    totalCountdown--;
-                    Debug.Log("Counting!");
+                    totalCountdown = startingCountdown;
+                    while (totalCountdown >= 0)
+                    {
+                        CountDownNumber(totalCountdown);
+                        yield return new WaitForSeconds(0.1f);
+                        totalCountdown = totalCountdown - 0.1f;
+                        Debug.Log("Counting!");
+                    }
+
+                    player.Damage(damageAmout);
+                    UpdateCountdownNumber();
                 }
-                player.Damage(damageAmout);
-                UpdateCountdownNumber();
+
             }
         }
+
+
     }
 }

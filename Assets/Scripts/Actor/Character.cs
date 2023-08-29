@@ -10,6 +10,7 @@ namespace Actor
         [SerializeField] private int hp;
         [SerializeField] private int maxHp;
         [SerializeField] private bool isBlocked = false;
+        [SerializeField] private bool isStuned = false;
 
         public void Damage(int damage)
         {
@@ -29,6 +30,19 @@ namespace Actor
             }
         }
 
+        public void DotSkill()
+        {
+            
+        }
+
+        public void Stun()
+        {
+            if (!isStuned)
+            {
+                
+            }
+        }
+
         public int GetHp()
         {
             return hp;
@@ -43,5 +57,7 @@ namespace Actor
         {
             isBlocked = block;
         }
+        
+        
     }
 }

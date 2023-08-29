@@ -8,6 +8,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Mechanic/PlayerStunMechanic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Skills/Behaviours/DotSkill.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Unity/Counter/Assets/Scripts/CounterButton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Unity/Counter/Assets/Scripts/StopwatchScript.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -86,6 +88,8 @@
       <workItem from="1692684494099" duration="1476000" />
       <workItem from="1692798861597" duration="5859000" />
       <workItem from="1693295116004" duration="433000" />
+      <workItem from="1693299610333" duration="3494000" />
+      <workItem from="1693304032450" duration="6114000" />
     </task>
     <servers />
   </component>
