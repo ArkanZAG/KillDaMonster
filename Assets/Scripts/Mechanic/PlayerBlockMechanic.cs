@@ -39,9 +39,9 @@ namespace Mechanic
             
             player.SetBlockState(false);
 
-            blockButton.interactable = true;
-            
             imageColor.color = Color.white;
+
+            blockButton.interactable = true;
         }
 
         private void DoBlock()

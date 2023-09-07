@@ -10,7 +10,7 @@ namespace Actor
     {
         [SerializeField] private Character player;
         [SerializeField] private int damageAmout;
-        [SerializeField] private TextMeshProUGUI countdown;
+        [SerializeField] private TextMeshPro countdown;
         [SerializeField] private Coroutine attackCoroutine;
         private float totalCountdown;
         private bool isStunned = false;
@@ -57,7 +57,6 @@ namespace Actor
                         totalCountdown = totalCountdown - 0.1f;
                         Debug.Log("Counting!");
                     }
-
                     player.Damage(damageAmout);
                     UpdateCountdownNumber();
                 }
