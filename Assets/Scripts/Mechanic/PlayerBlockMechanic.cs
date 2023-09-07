@@ -15,11 +15,11 @@ namespace Mechanic
         [SerializeField] private Character player;
         [SerializeField] private Image imageColor;
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private ParticleSystem playerParticle;
 
         private void Start()
         {
             blockButton.onClick.AddListener(DoBlock);
+            Debug.Log("BLOCKING!");
         }
 
         private IEnumerator BlockCoroutine()
@@ -48,6 +48,7 @@ namespace Mechanic
         {
             playerAnimator.SetTrigger("Block");
             StartCoroutine(BlockCoroutine());
+            Debug.Log("block!!");
         }
         
        
