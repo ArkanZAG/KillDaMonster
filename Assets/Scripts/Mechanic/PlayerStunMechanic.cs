@@ -19,6 +19,4 @@ public class PlayerStunMechanic : MonoBehaviour
     {
         monster.SetIsStunned(true);
     }
-
-    
 }

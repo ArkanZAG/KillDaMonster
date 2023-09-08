@@ -35,10 +35,12 @@ namespace Actor
         {
             if (isStunned)
             {
+                Debug.Log("stunning!");
                 StopCoroutine(attackCoroutine);
             }
             else
             {
+                Debug.Log("Stun Finish");
                 attackCoroutine = StartCoroutine(AttackBehaviour(totalCountdown));
             }
         }
@@ -53,12 +55,16 @@ namespace Actor
                     while (totalCountdown >= 0)
                     {
                         CountDownNumber(totalCountdown);
-                        yield return new WaitForSeconds(0.1f);
-                        totalCountdown = totalCountdown - 0.1f;
-                        Debug.Log("Counting!");
+                        yield return new WaitForEndOfFrame();
+                        totalCountdown = totalCountdown - Time.deltaTime;
+                        countdown.text = totalCountdown.ToString("F1");
                     }
                     player.Damage(damageAmout);
                     UpdateCountdownNumber();
+                }
+                if (isStunned)
+                {
+                    yield break;
                 }
 
             }
