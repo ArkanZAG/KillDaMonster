@@ -11,14 +11,36 @@ namespace Actor
         [SerializeField] private int maxHp;
         [SerializeField] private bool isBlocked = false;
         [SerializeField] private bool isStuned = false;
+        [SerializeField] private ParticleSystem blockParticle;
+        [SerializeField] private ParticleSystem damageParticle;
+        [SerializeField] private AudioSource damageAudio;
+        [SerializeField] private AudioClip damageClip;
+        [SerializeField] private AudioClip healClip;
 
         public void Damage(int damage)
         {
             if (!isBlocked)
             {
+                damageParticle.Stop();
                 hp = hp - damage;
-                transform.DOShakePosition(0.2f, Vector3.right * 10f);
+                if (hp <= 0)
+                {
+                    OnDeath();
+                }
+                transform.DOShakePosition(0.2f, Vector3.right * 1f);
+                damageParticle.Play();
+                damageAudio.PlayOneShot(damageClip);
             }
+            else
+            {
+                blockParticle.Stop();
+                blockParticle.Play();
+            }
+        }
+
+        protected virtual void OnDeath()
+        {
+            
         }
 
         public void Heal(int heal)

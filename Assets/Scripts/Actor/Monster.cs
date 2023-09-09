@@ -3,13 +3,14 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actor
 {
     public class Monster : Character
     {
         [SerializeField] private Character player;
-        [SerializeField] private int damageAmout;
+        [FormerlySerializedAs("damageAmout")] [SerializeField] private int damageAmount;
         [SerializeField] private TextMeshPro countdown;
         [SerializeField] private Coroutine attackCoroutine;
         private float totalCountdown;
@@ -19,16 +20,6 @@ namespace Actor
         private void Start()
         {
             attackCoroutine = StartCoroutine(AttackBehaviour(3));
-        }
-
-        private void CountDownNumber(float secondLeft)
-        {
-            countdown.text = secondLeft.ToString();
-        }
-
-        private void UpdateCountdownNumber()
-        {
-            countdown.text = totalCountdown.ToString();
         }
 
         public void SetIsStunned(bool isStunned)
@@ -41,7 +32,7 @@ namespace Actor
             else
             {
                 Debug.Log("Stun Finish");
-                attackCoroutine = StartCoroutine(AttackBehaviour(totalCountdown));
+                attackCoroutine = StartCoroutine(AttackAfterStunBehaviour());
             }
         }
 
@@ -49,27 +40,27 @@ namespace Actor
         {
             while (true)
             {
-                if (!isCouroutinePaused)
+                totalCountdown = startingCountdown;
+                while (totalCountdown >= 0)
                 {
-                    totalCountdown = startingCountdown;
-                    while (totalCountdown >= 0)
-                    {
-                        CountDownNumber(totalCountdown);
-                        yield return new WaitForEndOfFrame();
-                        totalCountdown = totalCountdown - Time.deltaTime;
-                        countdown.text = totalCountdown.ToString("F1");
-                    }
-                    player.Damage(damageAmout);
-                    UpdateCountdownNumber();
+                    yield return new WaitForEndOfFrame();
+                    totalCountdown = totalCountdown - Time.deltaTime;
+                    countdown.text = totalCountdown.ToString("f1");
                 }
-                if (isStunned)
-                {
-                    yield break;
-                }
-
+                player.Damage(damageAmount);
             }
         }
-
-
+        
+        IEnumerator AttackAfterStunBehaviour()
+        {
+            while (totalCountdown >= 0)
+            {
+                yield return new WaitForEndOfFrame();
+                totalCountdown = totalCountdown - Time.deltaTime;
+                countdown.text = totalCountdown.ToString("f1");
+            }
+            player.Damage(damageAmount);
+           attackCoroutine = StartCoroutine(AttackBehaviour(3f));
+        }
     }
 }

@@ -17,6 +17,21 @@ public class PlayerStunMechanic : MonoBehaviour
 
     private void Stun()
     {
+        StartCoroutine(StunCoroutine());
+    }
+
+    private IEnumerator StunCoroutine()
+    {
+        float setDuration = 2f;
+        
         monster.SetIsStunned(true);
+
+        stunButton.interactable = false;
+
+        yield return new WaitForSeconds(setDuration);
+        
+        monster.SetIsStunned(false);
+
+        stunButton.interactable = true;
     }
 }
