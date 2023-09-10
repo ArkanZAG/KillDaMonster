@@ -13,13 +13,14 @@ namespace Actor
         [FormerlySerializedAs("damageAmout")] [SerializeField] private int damageAmount;
         [SerializeField] private TextMeshPro countdown;
         [SerializeField] private Coroutine attackCoroutine;
+        [SerializeField] private float startingCountdown = 3f;
         private float totalCountdown;
         private bool isStunned = false;
         private bool isCouroutinePaused = false;
 
         private void Start()
         {
-            attackCoroutine = StartCoroutine(AttackBehaviour(3));
+            attackCoroutine = StartCoroutine(AttackBehaviour());
         }
 
         public void SetIsStunned(bool isStunned)
@@ -36,7 +37,7 @@ namespace Actor
             }
         }
 
-        IEnumerator AttackBehaviour(float startingCountdown)
+        IEnumerator AttackBehaviour()
         {
             while (true)
             {
@@ -60,7 +61,7 @@ namespace Actor
                 countdown.text = totalCountdown.ToString("f1");
             }
             player.Damage(damageAmount);
-           attackCoroutine = StartCoroutine(AttackBehaviour(3f));
+           attackCoroutine = StartCoroutine(AttackBehaviour());
         }
     }
 }
